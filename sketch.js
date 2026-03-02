@@ -25,6 +25,8 @@ let target;
 
 let sins;
 
+let font;
+
 function preload(){
   wn = loadImage('Images/Sins/WrathNo.png');
   wm = loadImage('Images/Sins/WrathMaybe.png');
@@ -95,6 +97,8 @@ function preload(){
   ng13 = loadImage('Images/Sinners/13ng.png');
   tablet = loadImage('Images/DanteTablet.png');
 
+  font = loadFont('Fonts/Mikodacs.otf'); /*font and text stuff*/
+
 
   yisang = 1;
   faust = 1;
@@ -112,6 +116,8 @@ function preload(){
 }
 
 function setup() {
+textFont(font);
+
   createCanvas(windowWidth, windowHeight);
   table = loadTable('Data/Sinners.csv',',','header');
   chosen1 = -1;
@@ -753,5 +759,9 @@ function draw() {
   sinnerButtons();
   
   drawSins();
+  fill(255);
+  textSize(30);
+  textAlign(CENTER);
+  text("Mephistophle - Test Your Limbus Company Knowledge", windowWidth/2, 1000 * ratio);
   
 }
