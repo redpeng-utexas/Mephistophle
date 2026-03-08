@@ -561,7 +561,7 @@ function checkClick(){
         heathcliff = 3;
         if(chosen1 < 0){chosen1 = 6;}
         else if(chosen2 > 0){chosen2 = 6;}
-        else if(chosen3 < 0){chosen3 = 6;}
+        else if(chosen3 < 0){chosen3 = 6;} 
         
     } else if(mouseX > 248 * ratio && mouseX < 248 * ratio + ng2.width * ratio / 3 && mouseY > 475 * ratio && mouseY < 475 * ratio + ng2.height * ratio / 3 && mouseIsPressed && ishmael < 3){
         ishmael = 3;
