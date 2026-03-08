@@ -143,8 +143,8 @@ function setup() {
   console.log(sins2);
   console.log(sins3);
 
-  //target = parseInt(random() * 13);
-  target = 2;
+  target = parseInt(random() * 13);
+  //target = 2;
 
   stringray = Image[9];
   
@@ -505,14 +505,14 @@ function drawSins(){ //FIX
         image(ds3, 1410 * ratio, 150 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
     }
     if(chosen2 >= 0){
-        image(pn, 950 * ratio, 365 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
-        image(wm, 1180 * ratio, 365 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
-        image(em, 1410 * ratio, 365 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
+        image(ds4, 950 * ratio, 365 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
+        image(ds5, 1180 * ratio, 365 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
+        image(ds6, 1410 * ratio, 365 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
     }
     if(chosen3 >= 0){
-        image(ey, 950 * ratio, 580 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
-        image(ly, 1180 * ratio, 580 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
-        image(wy, 1410 * ratio, 580 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
+        image(ds7, 950 * ratio, 580 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
+        image(ds8, 1180 * ratio, 580 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
+        image(ds9, 1410 * ratio, 580 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
     }
 
     /*for(i = 0; i < 1; i++){
@@ -639,7 +639,7 @@ function draw() {
   textSize(30);
   textAlign(CENTER);
   text("Mephistophle - Test Your Limbus Company Knowledge", windowWidth/2, 1000 * ratio);
-  //text(sins1[1], windowWidth/2, 1000 * ratio);
+  //text(target, windowWidth/2, 1000 * ratio);
   //image(sinImages[0][0], 10, 10);
 
 }
