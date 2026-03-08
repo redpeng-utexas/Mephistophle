@@ -9,14 +9,15 @@ let yisang,faust,donquixote,ryoshu,meursault,honglu,heathcliff,ishmael,rodion,si
 let d1,d2,d3,d4,d5,d6,d7,d8,d9,d11,d12,d13;
 let g1,g2,g3,g4,g5,g6,g7,g8,g9,g11,g12,g13;
 let ng1,ng2,ng3,ng4,ng5,ng6,ng7,ng8,ng9,ng11,ng12,ng13;
-let wn, wm, wy;
+/*let wn, wm, wy;
 let ln,lm,ly;
 let sn,sm,sy;
 let gn,gm,gy;
 let gln, glm, gly;
 let pn, pm, py;
-let en, em, ey;
+let en, em, ey;*/
 let chosen1, chosen2, chosen3;
+let sinsec1, sinsec2, sinsec3;
 let sins1, sins2, sins3;
 let ds1, ds2, ds3, ds4, ds5, ds6, ds7, ds8, ds9;
 
@@ -24,10 +25,12 @@ let coords;
 let target;
 
 let sins;
+let sinImages;
 
 let font;
 
 function preload(){
+
   wn = loadImage('Images/Sins/WrathNo.png');
   wm = loadImage('Images/Sins/WrathMaybe.png');
   wy = loadImage('Images/Sins/WrathYes.png');
@@ -55,6 +58,8 @@ function preload(){
   en = loadImage('Images/Sins/EnvyNo.png');
   em = loadImage('Images/Sins/EnvyMaybe.png');
   ey = loadImage('Images/Sins/EnvyYes.png');
+
+  sinImages = [[wn, wm, wy], [ln, lm, ly], [sn, sm, sy], [gn, gm, gy], [gln, glm, gly], [pn, pm, py], [en, em, ey]];
 
     //Creates the base sinner images
   d1 = loadImage('Images/Sinners/1d.png');
@@ -112,23 +117,31 @@ function preload(){
   sinclair = 1;
   outis = 1;
   gregor = 1;
+  table = loadTable('Data/Sinners.csv',',','header');
 
 }
 
 function setup() {
-textFont(font);
+  textFont(font);
 
+  sinsec1 = false;
+  sinsec2 = false;
+  sinsec3 = false;
   createCanvas(windowWidth, windowHeight);
-  table = loadTable('Data/Sinners.csv',',','header');
+  
   chosen1 = -1;
   chosen2 = -1;
   chosen3 = -1;
   
   ratio = 0;
   startTimer = -100;
-  sins1 = table.getColumn(4);
-  sins2 = table.getColumn(5);
-  sins3 = table.getColumn(6);
+  sins1 = table.getColumn(3);
+  sins2 = table.getColumn(4);
+  sins3 = table.getColumn(5);
+
+  console.log(table);
+  console.log(sins2);
+  console.log(sins3);
 
   //target = parseInt(random() * 13);
   target = 2;
@@ -284,227 +297,90 @@ function sinnerButtons(){
 }
 
 function drawSins(){ //FIX
-    /*if(sins1[chosen1] == sins1[target]){
-        switch(sins1[chosen1]){
-            case "wrath":
-                ds1 = wy;
-                break;
-            case "lust":
-                ds1 = ly;
-                break;
-            case "sloth":
-                ds1 = sy;
-                break;
-            case "gluttony":
-                ds1 = gy;
-                break;
-            case "gloom":
-                ds1 = gly;
-                break;
-            case "pride":
-                ds1 = py;
-                break;
-            case "envy":
-                ds1 = ey;
-                break;
+    if(chosen1 >= 0 && !sinsec1){
+        if(sins1[chosen1] == sins1[target]){
+            ds1 = sinImages[sins1[chosen1] - 1][2];
+        } else if(sins1[chosen1] == sins2[target] || sins1[chosen1] == sins3[target]){
+            ds1 = sinImages[sins1[chosen1] - 1][1];
+        } else {
+            ds1 = sinImages[sins1[chosen1] - 1][0];
         }
-    } else if(sins1[chosen1] == sins2[target] || sins1[chosen1] == sins3[target]){
-        switch(sins1[chosen1]){
-            case "wrath":
-                ds1 = wm;
-                break;
-            case "lust":
-                ds1 = lm;
-                break;
-            case "sloth":
-                ds1 = sm;
-                break;
-            case "gluttony":
-                ds1 = gm;
-                break;
-            case "gloom":
-                ds1 = glm;
-                break;
-            case "pride":
-                ds1 = pm;
-                break;
-            case "envy":
-                ds1 = em;
-                break;
+
+        if(sins2[chosen1] == sins2[target]){
+            ds2 = sinImages[sins2[chosen1] - 1][2];
+        } else if(sins2[chosen1] == sins1[target] || sins2[chosen1] == sins3[target]){
+            ds2 = sinImages[sins2[chosen1] - 1][1];
+        } else {
+            ds2 = sinImages[sins2[chosen1] - 1][0];
         }
-    } else {
-        switch(sins1[chosen1]){
-            case "wrath":
-                ds1 = wn;
-                break;
-            case "lust":
-                ds1 = ln;
-                break;
-            case "sloth":
-                ds1 = sn;
-                break;
-            case "gluttony":
-                ds1 = gn;
-                break;
-            case "gloom":
-                ds1 = gln;
-                break;
-            case "pride":
-                ds1 = pn;
-                break;
-            case "envy":
-                ds1 = en;
-                break;
+
+        if(sins3[chosen1] == sins3[target]){
+            ds3 = sinImages[sins3[chosen1] - 1][2];
+        } else if(sins3[chosen1] == sins2[target] || sins3[chosen1] == sins1[target]){
+            ds3 = sinImages[sins3[chosen1] - 1][1];
+        } else {
+            ds3 = sinImages[sins3[chosen1] - 1][0];
         }
+
+        sinsec1 = true;
+    }
+    
+    if(chosen2 >= 0 && !sinsec2){
+        if(sins1[chosen2] == sins1[target]){
+            ds4 = sinImages[sins1[chosen2] - 1][2];
+        } else if(sins1[chosen2] == sins2[target] || sins1[chosen2] == sins3[target]){
+            ds4 = sinImages[sins1[chosen2] - 1][1];
+        } else {
+            ds4 = sinImages[sins1[chosen2] - 1][0];
+        }
+
+        if(sins2[chosen2] == sins2[target]){
+            ds5 = sinImages[sins2[chosen2] - 1][2];
+        } else if(sins2[chosen2] == sins1[target] || sins2[chosen2] == sins3[target]){
+            ds5 = sinImages[sins2[chosen2] - 1][1];
+        } else {
+            ds5 = sinImages[sins2[chosen2] - 1][0];
+        }
+
+        if(sins3[chosen2] == sins3[target]){
+            ds6 = sinImages[sins3[chosen2] - 1][2];
+        } else if(sins3[chosen2] == sins2[target] || sins3[chosen2] == sins1[target]){
+            ds6 = sinImages[sins3[chosen2] - 1][1];
+        } else {
+            ds6 = sinImages[sins3[chosen2] - 1][0];
+        }
+
+        sinsec2 = true;
     }
 
-    if(sins2[chosen1] == sins2[target]){
-        switch(sins2[chosen1]){
-            case "wrath":
-                ds2 = wy;
-                break;
-            case "lust":
-                ds2 = ly;
-                break;
-            case "sloth":
-                ds2 = sy;
-                break;
-            case "gluttony":
-                ds2 = gy;
-                break;
-            case "gloom":
-                ds2 = gly;
-                break;
-            case "pride":
-                ds2 = py;
-                break;
-            case "envy":
-                ds2 = ey;
-                break;
+    if(chosen3 >= 0 && !sinsec3){
+        if(sins1[chosen3] == sins1[target]){
+            ds7 = sinImages[sins1[chosen3] - 1][2];
+        } else if(sins1[chosen3] == sins2[target] || sins1[chosen3] == sins3[target]){
+            ds7 = sinImages[sins1[chosen3] - 1][1];
+        } else {
+            ds7 = sinImages[sins1[chosen3] - 1][0];
         }
-    } else if(sins2[chosen1] == sins1[target] || sins2[chosen1] == sins3[target]){
-        switch(sins2[chosen1]){
-            case "wrath":
-                ds2 = wm;
-                break;
-            case "lust":
-                ds2 = lm;
-                break;
-            case "sloth":
-                ds2 = sm;
-                break;
-            case "gluttony":
-                ds2 = gm;
-                break;
-            case "gloom":
-                ds2 = glm;
-                break;
-            case "pride":
-                ds2 = pm;
-                break;
-            case "envy":
-                ds2 = em;
-                break;
+
+        if(sins2[chosen3] == sins2[target]){
+            ds8 = sinImages[sins2[chosen3] - 1][2];
+        } else if(sins2[chosen3] == sins1[target] || sins2[chosen3] == sins3[target]){
+            ds8 = sinImages[sins2[chosen3] - 1][1];
+        } else {
+            ds8 = sinImages[sins2[chosen3] - 1][0];
         }
-    } else {
-        switch(sins2[chosen1]){
-            case "wrath":
-                ds2 = wn;
-                break;
-            case "lust":
-                ds2 = ln;
-                break;
-            case "sloth":
-                ds2 = sn;
-                break;
-            case "gluttony":
-                ds2 = gn;
-                break;
-            case "gloom":
-                ds2 = gln;
-                break;
-            case "pride":
-                ds2 = pn;
-                break;
-            case "envy":
-                ds2 = en;
-                break;
+
+        if(sins3[chosen3] == sins3[target]){
+            ds9 = sinImages[sins3[chosen3] - 1][2];
+        } else if(sins3[chosen3] == sins2[target] || sins3[chosen3] == sins1[target]){
+            ds9 = sinImages[sins3[chosen3] - 1][1];
+        } else {
+            ds9 = sinImages[sins3[chosen3] - 1][0];
         }
+
+        sinsec3 = true;
     }
 
-    if(sins3[chosen1] == sins3[target]){
-        switch(sins3[chosen1]){
-            case "wrath":
-                ds3 = wy;
-                break;
-            case "lust":
-                ds3 = ly;
-                break;
-            case "sloth":
-                ds3 = sy;
-                break;
-            case "gluttony":
-                ds3 = gy;
-                break;
-            case "gloom":
-                ds3 = gly;
-                break;
-            case "pride":
-                ds3 = py;
-                break;
-            case "envy":
-                ds3 = ey;
-                break;
-        }
-    } else if(sins3[chosen1] == sins2[target] || sins3[chosen1] == sins1[target]){
-        switch(sins3[chosen1]){
-            case "wrath":
-                ds3 = wm;
-                break;
-            case "lust":
-                ds3 = lm;
-                break;
-            case "sloth":
-                ds3 = sm;
-                break;
-            case "gluttony":
-                ds3 = gm;
-                break;
-            case "gloom":
-                ds3 = glm;
-                break;
-            case "pride":
-                ds3 = pm;
-                break;
-            case "envy":
-                ds3 = em;
-                break;
-        }
-    } else {
-        switch(sins3[chosen1]){
-            case "wrath":
-                ds3 = wn;
-                break;
-            case "lust":
-                ds3 = ln;
-                break;
-            case "sloth":
-                ds3 = sn;
-                break;
-            case "gluttony":
-                ds3 = gn;
-                break;
-            case "gloom":
-                ds3 = gln;
-                break;
-            case "pride":
-                ds3 = pn;
-                break;
-            case "envy":
-                ds3 = en;
-                break;
-        }
-    }*/
 
     switch(chosen1){
         case 0:
@@ -624,9 +500,9 @@ function drawSins(){ //FIX
     }
 
     if(chosen1 >= 0){
-        image(wm, 950 * ratio, 150 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
-        image(em, 1180 * ratio, 150 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
-        image(gn, 1410 * ratio, 150 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
+        image(ds1, 950 * ratio, 150 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
+        image(ds2, 1180 * ratio, 150 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
+        image(ds3, 1410 * ratio, 150 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
     }
     if(chosen2 >= 0){
         image(pn, 950 * ratio, 365 * ratio, wn.width * ratio / 1.5, wn.height * ratio / 1.5);
@@ -751,7 +627,7 @@ function draw() {
     gregor = 1;
   }
 
-
+  
 
   background(20);
   ratio =  windowWidth / tablet.width  / 0.7
@@ -763,5 +639,7 @@ function draw() {
   textSize(30);
   textAlign(CENTER);
   text("Mephistophle - Test Your Limbus Company Knowledge", windowWidth/2, 1000 * ratio);
-  
+  //text(sins1[1], windowWidth/2, 1000 * ratio);
+  //image(sinImages[0][0], 10, 10);
+
 }
